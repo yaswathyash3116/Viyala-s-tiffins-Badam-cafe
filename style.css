@@ -81,6 +81,7 @@ ul { list-style: none; }
   flex-shrink: 0;
 }
 .logo-icon { font-size: 1.8rem; }
+.logo-image { height: 40px; width: auto; object-fit: contain; border-radius: 50%; }
 .logo-text {
   display: block;
   font-family: var(--font-display);
@@ -896,3 +897,43 @@ ul { list-style: none; }
   .spec-grid { grid-template-columns: 1fr; }
   .hero-ctas { flex-direction: column; align-items: flex-start; }
 }
+
+
+/* ===== CART STYLES ===== */
+.add-to-cart-btn {
+  background: var(--saffron);
+  border: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--dark);
+  transition: var(--transition);
+}
+.add-to-cart-btn:hover {
+  background: var(--saffron-light);
+  transform: translateY(-2px);
+}
+.cart-modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2000; opacity: 0; pointer-events: none; transition: var(--transition);
+}
+.cart-modal-overlay.active { opacity: 1; pointer-events: all; }
+.cart-modal-content {
+  background: var(--dark-card); width: 90%; max-width: 450px;
+  border-radius: var(--radius); padding: 25px;
+  border: 1px solid rgba(244,162,0,0.3); display: flex; flex-direction: column; gap: 20px;
+  max-height: 90vh; overflow-y: auto;
+}
+.cart-header { display: flex; justify-content: space-between; align-items: center; }
+.cart-header h2 { font-family: var(--font-display); color: var(--saffron); }
+#closeCartBtn { background: none; border: none; font-size: 2rem; color: var(--text-light); cursor: pointer; }
+.cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 10px; }
+.cart-item-info h5 { margin-bottom: 5px; color: white; }
+.cart-item-info span { color: var(--saffron); }
+.cart-item-controls { display: flex; align-items: center; gap: 10px; }
+.cart-item-controls button { background: rgba(255,255,255,0.1); border: none; color: white; width: 25px; height: 25px; border-radius: 5px; cursor: pointer; }
+.cart-footer input { width: 100%; padding: 12px; margin-top: 10px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: var(--radius-sm); font-family: var(--font-body); }
+.cart-total { font-family: var(--font-display); font-size: 1.4rem; font-weight: bold; color: var(--saffron); }
+.empty-cart { text-align: center; color: var(--text-light); }

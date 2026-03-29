@@ -141,3 +141,132 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Also run once immediately
 triggerAOS();
+
+
+
+// ===== CART LOGIC =====
+let cart = [];
+const cartModal = document.getElementById('cartModal');
+const openCartBtn = document.getElementById('openCartBtn');
+const closeCartBtn = document.getElementById('closeCartBtn');
+const cartItemsContainer = document.getElementById('cartItemsContainer');
+const cartTotalPrice = document.getElementById('cartTotalPrice');
+const cartCount = document.getElementById('cartCount');
+const checkoutBtn = document.getElementById('checkoutBtn');
+const WHATSAPP_NUMBER = '917386824414'; // Configured business number
+
+if(openCartBtn) openCartBtn.addEventListener('click', () => cartModal.classList.add('active'));
+if(closeCartBtn) closeCartBtn.addEventListener('click', () => cartModal.classList.remove('active'));
+
+document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const card = e.target.closest('.menu-card');
+    const nameNode = card.querySelector('h4');
+    if (!nameNode) return;
+    const name = nameNode.innerText;
+    const priceText = card.querySelector('.menu-price').innerText;
+    const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+    
+    // Check if in cart
+    const existing = cart.find(i => i.name === name);
+    if(existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ name, price, qty: 1 });
+    }
+    updateCartUI();
+    
+    // Animate button
+    const orgText = btn.innerText;
+    btn.innerText = 'Added!';
+    btn.style.background = '#27AE60';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.innerText = orgText;
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 1000);
+  });
+});
+
+function updateCartUI() {
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
+    cartTotalPrice.innerText = '0';
+    if(cartCount) cartCount.innerText = '0';
+    return;
+  }
+  
+  cartItemsContainer.innerHTML = '';
+  let total = 0;
+  let count = 0;
+  cart.forEach((item, index) => {
+    total += item.price * item.qty;
+    count += item.qty;
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <div class="cart-item-info">
+        <h5>${item.name}</h5>
+        <span>₹${item.price}</span>
+      </div>
+      <div class="cart-item-controls">
+        <button onclick="changeQty(${index}, -1)">-</button>
+        <span>${item.qty}</span>
+        <button onclick="changeQty(${index}, 1)">+</button>
+      </div>
+    `;
+    cartItemsContainer.appendChild(div);
+  });
+  cartTotalPrice.innerText = total;
+  if(cartCount) cartCount.innerText = count;
+}
+
+window.changeQty = (index, delta) => {
+  cart[index].qty += delta;
+  if (cart[index].qty <= 0) {
+    cart.splice(index, 1);
+  }
+  updateCartUI();
+};
+
+if(checkoutBtn) checkoutBtn.addEventListener('click', async () => {
+  if (cart.length === 0) return alert('Cart is empty!');
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  
+  if (!name || !phone) return alert('Please enter your name and phone number.');
+  
+  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  const loadingOrgText = checkoutBtn.innerText;
+  checkoutBtn.innerText = "Processing...";
+  checkoutBtn.disabled = true;
+
+  // 1. Send to Backend Database
+  try {
+    const res = await fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, items: cart, total })
+    });
+    if(!res.ok) console.error("Could not save to DB");
+  } catch (err) {
+    console.error("Backend error", err);
+  }
+
+  // 2. Format WhatsApp Message
+  let text = `Hello Viyala's! I would like to place an order:%0A%0A`;
+  cart.forEach(item => {
+    text += `*${item.qty}x ${item.name}* - ₹${item.price * item.qty}%0A`;
+  });
+  text += `%0A*Total: ₹${total}*%0A%0ACustomer Name: ${name}%0APhone: ${phone}`;
+  
+  cart = []; // Empty cart
+  updateCartUI();
+  cartModal.classList.remove('active');
+  checkoutBtn.innerText = loadingOrgText;
+  checkoutBtn.disabled = false;
+  
+  // Redirect to WhatsApp
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
+});
