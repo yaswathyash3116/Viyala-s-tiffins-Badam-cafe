@@ -937,3 +937,38 @@ ul { list-style: none; }
 .cart-footer input { width: 100%; padding: 12px; margin-top: 10px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: var(--radius-sm); font-family: var(--font-body); }
 .cart-total { font-family: var(--font-display); font-size: 1.4rem; font-weight: bold; color: var(--saffron); }
 .empty-cart { text-align: center; color: var(--text-light); }
+
+.item-qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(244,162,0,0.1);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(244,162,0,0.3);
+}
+.item-qty-controls button {
+  background: var(--saffron);
+  border: none;
+  color: var(--dark);
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item-qty-controls button:hover {
+  background: var(--saffron-light);
+  transform: translateY(-2px);
+}
+.item-qty-controls span {
+  font-weight: 700;
+  color: var(--white);
+  min-width: 16px;
+  text-align: center;
+}

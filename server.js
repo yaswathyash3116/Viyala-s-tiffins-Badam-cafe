@@ -59,3 +59,27 @@ app.get('/api/orders', (req, res) => {
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
+// Save order API
+app.post("/order", (req, res) => {
+  const { name, item, quantity } = req.body;
+
+  const db = require("sqlite3").verbose();
+  const database = new db.Database("orders.db");
+
+  database.run(
+    "CREATE TABLE IF NOT EXISTS orders (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, item TEXT, quantity INTEGER)"
+  );
+
+  database.run(
+    "INSERT INTO orders (name, item, quantity) VALUES (?, ?, ?)",
+    [name, item, quantity],
+    function (err) {
+      if (err) {
+        return res.json({ success: false });
+      }
+      res.json({ success: true });
+    }
+  );
+
+  database.close();
+});

@@ -158,68 +158,94 @@ const WHATSAPP_NUMBER = '917386824414'; // Configured business number
 if(openCartBtn) openCartBtn.addEventListener('click', () => cartModal.classList.add('active'));
 if(closeCartBtn) closeCartBtn.addEventListener('click', () => cartModal.classList.remove('active'));
 
-document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    const card = e.target.closest('.menu-card');
-    const nameNode = card.querySelector('h4');
+function syncCardsUI() {
+  document.querySelectorAll('.menu-card, .spec-card').forEach(card => {
+    const nameNode = card.querySelector('h4') || card.querySelector('h3');
     if (!nameNode) return;
     const name = nameNode.innerText;
-    const priceText = card.querySelector('.menu-price').innerText;
-    const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+    const cartItem = cart.find(i => i.name === name);
     
-    // Check if in cart
-    const existing = cart.find(i => i.name === name);
-    if(existing) {
-      existing.qty += 1;
-    } else {
-      cart.push({ name, price, qty: 1 });
+    const bottomContainer = card.querySelector('.menu-card-bottom') || card.querySelector('.spec-footer');
+    if (!bottomContainer) return;
+    
+    let actionWrapper = bottomContainer.querySelector('.action-wrapper');
+    if (!actionWrapper) {
+      const existingBtn = bottomContainer.querySelector('.add-to-cart-btn');
+      if (existingBtn) {
+         actionWrapper = document.createElement('div');
+         actionWrapper.className = 'action-wrapper';
+         bottomContainer.insertBefore(actionWrapper, existingBtn);
+         existingBtn.remove();
+      } else {
+         return; 
+      }
     }
-    updateCartUI();
     
-    // Animate button
-    const orgText = btn.innerText;
-    btn.innerText = 'Added!';
-    btn.style.background = '#27AE60';
-    btn.style.color = '#fff';
-    setTimeout(() => {
-      btn.innerText = orgText;
-      btn.style.background = '';
-      btn.style.color = '';
-    }, 1000);
+    if (cartItem && cartItem.qty > 0) {
+      actionWrapper.innerHTML = `
+        <div class="item-qty-controls">
+          <button onclick="changeItemQty('${name.replace(/'/g, "\\'")}', -1)">-</button>
+          <span>${cartItem.qty}</span>
+          <button onclick="changeItemQty('${name.replace(/'/g, "\\'")}', 1)">+</button>
+        </div>
+      `;
+    } else {
+       actionWrapper.innerHTML = `<button class="add-to-cart-btn" onclick="changeItemQty('${name.replace(/'/g, "\\'")}', 1)">Add +</button>`;
+    }
   });
-});
+}
+
+window.changeItemQty = (name, delta) => {
+  const index = cart.findIndex(i => i.name === name);
+  if (index >= 0) {
+    window.changeQty(index, delta);
+  } else if (delta > 0) {
+    const cards = document.querySelectorAll('.menu-card, .spec-card');
+    for (let card of cards) {
+      const nameNode = card.querySelector('h4') || card.querySelector('h3');
+      if (nameNode && nameNode.innerText === name) {
+        const priceNode = card.querySelector('.menu-price') || card.querySelector('.spec-price');
+        const priceText = priceNode ? priceNode.innerText : '';
+        const price = parseInt(priceText.replace(/[^0-9]/g, '')) || 0;
+        cart.push({ name, price, qty: 1 });
+        updateCartUI();
+        break;
+      }
+    }
+  }
+};
 
 function updateCartUI() {
   if (cart.length === 0) {
     cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
     cartTotalPrice.innerText = '0';
     if(cartCount) cartCount.innerText = '0';
-    return;
+  } else {
+    cartItemsContainer.innerHTML = '';
+    let total = 0;
+    let count = 0;
+    cart.forEach((item, index) => {
+      total += item.price * item.qty;
+      count += item.qty;
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <div class="cart-item-info">
+          <h5>${item.name}</h5>
+          <span>₹${item.price}</span>
+        </div>
+        <div class="cart-item-controls">
+          <button onclick="changeQty(${index}, -1)">-</button>
+          <span>${item.qty}</span>
+          <button onclick="changeQty(${index}, 1)">+</button>
+        </div>
+      `;
+      cartItemsContainer.appendChild(div);
+    });
+    cartTotalPrice.innerText = total;
+    if(cartCount) cartCount.innerText = count;
   }
-  
-  cartItemsContainer.innerHTML = '';
-  let total = 0;
-  let count = 0;
-  cart.forEach((item, index) => {
-    total += item.price * item.qty;
-    count += item.qty;
-    const div = document.createElement('div');
-    div.className = 'cart-item';
-    div.innerHTML = `
-      <div class="cart-item-info">
-        <h5>${item.name}</h5>
-        <span>₹${item.price}</span>
-      </div>
-      <div class="cart-item-controls">
-        <button onclick="changeQty(${index}, -1)">-</button>
-        <span>${item.qty}</span>
-        <button onclick="changeQty(${index}, 1)">+</button>
-      </div>
-    `;
-    cartItemsContainer.appendChild(div);
-  });
-  cartTotalPrice.innerText = total;
-  if(cartCount) cartCount.innerText = count;
+  syncCardsUI();
 }
 
 window.changeQty = (index, delta) => {
@@ -229,6 +255,11 @@ window.changeQty = (index, delta) => {
   }
   updateCartUI();
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initial sync to set up buttons properly
+    setTimeout(syncCardsUI, 100);
+});
 
 if(checkoutBtn) checkoutBtn.addEventListener('click', async () => {
   if (cart.length === 0) return alert('Cart is empty!');
@@ -269,4 +300,27 @@ if(checkoutBtn) checkoutBtn.addEventListener('click', async () => {
   
   // Redirect to WhatsApp
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
+});
+document.getElementById("orderForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const item = document.getElementById("item").value;
+  const quantity = document.getElementById("quantity").value;
+
+  const res = await fetch("/order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, item, quantity }),
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
+    alert("✅ Order placed successfully!");
+  } else {
+    alert("❌ Error placing order");
+  }
 });
