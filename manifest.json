@@ -11,23 +11,23 @@
   "orientation": "portrait-primary",
   "lang": "en",
   "categories": ["food", "lifestyle"],
+
   "icons": [
-  {
-    "src": "images/launchericon-192x192.png",
-    "sizes": "192x192",
-    "type": "image/png"
-  },
-  {
-    "src": "images/launchericon-512x512.png",
-    "sizes": "512x512",
-    "type": "image/png"
-  }
-]
+    {
+      "src": "/images/launchericon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/launchericon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
+
   "screenshots": [
     {
-      "src": "images/screenshot1.png",
+      "src": "/images/screenshot1.png",
       "sizes": "540x720",
       "type": "image/png",
       "form_factor": "narrow",
