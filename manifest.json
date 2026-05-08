@@ -1,0 +1,29 @@
+{
+  "name": "VIYALA'S Tiffins and Badam Milk",
+  "short_name": "Viyala's",
+  "description": "Authentic South Indian Tiffins, Badam Milk & Filter Coffee since 1998",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#b5451b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/hero_food.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ]
+}
