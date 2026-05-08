@@ -28,7 +28,7 @@
   "screenshots": [
     {
       "src": "/images/screenshot1.png",
-      "sizes": "540x720",
+      "sizes": "1080x2400",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Home screen of VIYALA'S app"
