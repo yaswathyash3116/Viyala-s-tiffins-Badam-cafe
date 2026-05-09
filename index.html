@@ -346,57 +346,45 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
 
   <!-- REVIEWS PAGE -->
   <div class="page" id="page-reviews">
-    <div class="reviews-top">
-      <div class="stars">★★★★★</div>
-      <h2>Loved by <em>Thousands</em></h2>
-      <p>What our regulars say about us</p>
-    </div>
-    <div class="reviews-list">
-      <div class="rcard">
-        <div class="stars">★★★★★</div>
-        <blockquote>"The badam milk here is absolutely out of this world. I've been coming every single morning for 5 years. There's nowhere else like it!"</blockquote>
-        <div class="rauthor"><div class="ravatar" style="background:var(--saffron);">P</div><div><div class="rname">Priya Subramaniam</div><div class="rrole">Regular Customer · Hyderabad</div></div></div>
-      </div>
-      <div class="rcard">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Best idli-sambar I've had outside of my grandmother's kitchen. The coconut chutney is fresh, the sambar is perfectly tangy — it's home in a plate."</blockquote>
-        <div class="rauthor"><div class="ravatar" style="background:var(--green);">R</div><div><div class="rname">Rajan Krishnaswamy</div><div class="rrole">Food Blogger</div></div></div>
-      </div>
-      <div class="rcard">
-        <div class="stars">★★★★★</div>
-        <blockquote>"I moved to this city 2 years ago and VIYALA'S instantly became my comfort food place. The masala dosa is crispy, golden perfection!"</blockquote>
-        <div class="rauthor"><div class="ravatar" style="background:var(--red);">L</div><div><div class="rname">Lakshmi Narayanan</div><div class="rrole">Local Resident · Kukatpally</div></div></div>
-      </div>
-      <div class="rcard">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Karam Dosa with filter coffee is my go-to breakfast combo. Fast service, hot food, unbeatable price. A gem in Kukatpally!"</blockquote>
-        <div class="rauthor"><div class="ravatar" style="background:#7C4DBC;">A</div><div><div class="rname">Arun Venkatesh</div><div class="rrole">Daily Visitor</div></div></div>
-      </div>
-      <div class="rcard">
-        <div class="stars">★★★★★</div>
-        <blockquote>"The Fruit Mix Badam Milk is heavenly! Never had anything like it. The flavors are rich and authentic. My whole family loves this place."</blockquote>
-        <div class="rauthor"><div class="ravatar" style="background:#0E7490;">S</div><div><div class="rname">Sunita Rao</div><div class="rrole">Food Enthusiast · Hyderabad</div></div></div>
-      </div>
-    </div>
-    </div>
-    </div>
-  </div>
-
-  <!-- new review -->
-  <div class="rcard">
+  <div class="reviews-top">
     <div class="stars">★★★★★</div>
-    <blockquote>"Your customer review text here."</blockquote>
-    <div class="rauthor">
-      <div class="ravatar" style="background:#E8860A;">M</div>
-      <div>
-        <div class="rname">Customer Name</div>
-        <div class="rrole">Regular Customer · Hyderabad</div>
-      </div>
-    </div>
+    <h2>Loved by <em>Thousands</em></h2>
+    <p>What our regulars say about us</p>
   </div>
 
-</div> 
+  <!-- REVIEW FORM -->
+  <div style="margin:16px;background:#fff;border-radius:14px;border:1px solid #F0E8D8;padding:18px;">
+    <h3 style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:14px;">Share Your <em style="color:#E8860A;">Experience</em></h3>
+
+    <input id="rv-name" placeholder="Your Name" style="width:100%;padding:10px 13px;border:1px solid #F0E8D8;border-radius:9px;font-size:14px;margin-bottom:10px;font-family:'DM Sans',sans-serif;outline:none;">
+    <input id="rv-location" placeholder="Your Location (e.g. Hyderabad)" style="width:100%;padding:10px 13px;border:1px solid #F0E8D8;border-radius:9px;font-size:14px;margin-bottom:10px;font-family:'DM Sans',sans-serif;outline:none;">
+
+    <div style="margin-bottom:10px;">
+      <p style="font-size:13px;color:#9A8060;margin-bottom:6px;">Your Rating</p>
+      <div id="star-selector" style="display:flex;gap:6px;font-size:28px;cursor:pointer;">
+        <span onclick="setRating(1)">☆</span>
+        <span onclick="setRating(2)">☆</span>
+        <span onclick="setRating(3)">☆</span>
+        <span onclick="setRating(4)">☆</span>
+        <span onclick="setRating(5)">☆</span>
+      </div>
+    </div>
+
+    <textarea id="rv-text" placeholder="Write your review here..." rows="3" style="width:100%;padding:10px 13px;border:1px solid #F0E8D8;border-radius:9px;font-size:14px;margin-bottom:12px;font-family:'DM Sans',sans-serif;outline:none;resize:none;"></textarea>
+
+    <button onclick="submitReview()" style="width:100%;background:#E8860A;color:#fff;border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">
+      ⭐ Submit Review
+    </button>
+    <p id="rv-msg" style="text-align:center;font-size:13px;margin-top:10px;color:#1A6B3A;display:none;">✅ Thank you! Your review has been submitted.</p>
   </div>
+
+  <!-- REVIEWS LIST -->
+  <div class="reviews-list" id="reviewsList">
+    <p style="text-align:center;color:#9A8060;font-size:13px;padding:20px;">Loading reviews...</p>
+  </div>
+</div>
+  </div>
+
 
   <!-- CONTACT PAGE -->
   <div class="page" id="page-contact">
