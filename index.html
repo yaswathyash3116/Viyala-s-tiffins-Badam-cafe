@@ -468,7 +468,7 @@ const MENU=[
   {name:'Signature Badam Milk',price:90,cat:'drinks',veg:true,icon:'🥛',tag:'Must Try'},
   {name:'Rose Milk',price:65,cat:'drinks',veg:true,icon:'🌹'},
   {name:'Nimbu Soda',price:60,cat:'drinks',veg:true,icon:'🍋'},
-  {name:'Sweet lassi',price:70,cat:'drinks',veg:true,icon:'🥛'}
+  {name:'Sweet lassi',price:70,cat:'drinks',veg:true,icon:'🥛'},
   {name:'Mango Lassi',price:85,cat:'drinks',veg:true,icon:'🥭',tag:'Seasonal'},
   {name:'Fruit Mix Lassi',price:90,cat:'drinks',veg:true,icon:'🍓'},
   {name:'Fruit Mix Badam Milk',price:100,cat:'drinks',veg:true,icon:'🥛'},
@@ -615,7 +615,7 @@ function sendWhatsApp(){
     msg+=`• ${name} × ${qty} = ₹${price*qty}\n`;
     total+=price*qty;
   });
-  msg+=`\n*Total: ₹${total}*\n\nPlease confirm my order. Thank you! 🙏`;
+  msg+=`\n*Total: ₹${total}*\n\nconfirm my order. Thank you! 🙏`;
   window.open('https://wa.me/917386824414?text='+encodeURIComponent(msg));
 }
 
