@@ -255,8 +255,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
           <div class="scard-body">
             <span class="scard-badge">⭐ Must Try</span>
             <h3>Signature Badam Milk</h3>
-            <div class="scard-price">₹60</div>
-            <button class="scard-add" onclick="addItem('Signature Badam Milk',60)">+ Add to Cart</button>
+            <div class="scard-price">₹90</div>
+            <button class="scard-add" onclick="addItem('Signature Badam Milk',90)">+ Add to Cart</button>
           </div>
         </div>
         <div class="scard">
@@ -264,8 +264,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
           <div class="scard-body">
             <span class="scard-badge">🔥 Bestseller</span>
             <h3>Full Tiffin Plate</h3>
-            <div class="scard-price">₹120</div>
-            <button class="scard-add" onclick="addItem('Full Tiffin Plate',120)">+ Add to Cart</button>
+            <div class="scard-price">₹150</div>
+            <button class="scard-add" onclick="addItem('Full Tiffin Plate',150)">+ Add to Cart</button>
           </div>
         </div>
         <div class="scard">
@@ -273,8 +273,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
           <div class="scard-body">
             <span class="scard-badge">☕ Classic</span>
             <h3>Filter Coffee</h3>
-            <div class="scard-price">₹25</div>
-            <button class="scard-add" onclick="addItem('South Indian Filter Coffee',25)">+ Add to Cart</button>
+            <div class="scard-price">₹55</div>
+            <button class="scard-add" onclick="addItem('South Indian Filter Coffee',55)">+ Add to Cart</button>
           </div>
         </div>
         <div class="scard">
@@ -282,8 +282,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
           <div class="scard-body">
             <span class="scard-badge">🌶️ Spicy</span>
             <h3>Karam Dosa</h3>
-            <div class="scard-price">₹50</div>
-            <button class="scard-add" onclick="addItem('Karam Dosa',50)">+ Add to Cart</button>
+            <div class="scard-price">₹80</div>
+            <button class="scard-add" onclick="addItem('Karam Dosa',80)">+ Add to Cart</button>
           </div>
         </div>
       </div>
@@ -453,42 +453,42 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
 <script>
 /* ───────── DATA ───────── */
 const MENU=[
-  {name:'Soft Idli',price:40,cat:'tiffins',veg:true,icon:'🥮'},
-  {name:'Masala Dosa',price:70,cat:'tiffins',veg:true,icon:'🫓'},
-  {name:'Karam Dosa',price:50,cat:'tiffins',veg:true,icon:'🌶️'},
-  {name:'Egg Dosa',price:65,cat:'tiffins',veg:false,icon:'🍳'},
-  {name:'Onion Dosa',price:45,cat:'tiffins',veg:true,icon:'🧅'},
-  {name:'Double Egg Dosa',price:65,cat:'tiffins',veg:false,icon:'🍳'},
-  {name:'Dosa (Plain)',price:50,cat:'tiffins',veg:true,icon:'🫓'},
-  {name:'Special Combo Offer',price:120,cat:'tiffins',veg:true,icon:'🍽️',tag:'Bestseller'},
-  {name:'Ghee Idly',price:50,cat:'tiffins',veg:true,icon:'🥮'},
-  {name:'Ghee Karam Dosa',price:65,cat:'tiffins',veg:true,icon:'🌶️'},
-  {name:'Boiled Egg',price:15,cat:'tiffins',veg:false,icon:'🥚'},
-  {name:'Double Egg Omelette',price:40,cat:'tiffins',veg:false,icon:'🍳'},
-  {name:'Signature Badam Milk',price:60,cat:'drinks',veg:true,icon:'🥛',tag:'Must Try'},
-  {name:'Rose Milk',price:35,cat:'drinks',veg:true,icon:'🌹'},
-  {name:'Nimbu Soda',price:30,cat:'drinks',veg:true,icon:'🍋'},
-  {name:'Mango Lassi',price:55,cat:'drinks',veg:true,icon:'🥭',tag:'Seasonal'},
-  {name:'Fruit Mix Lassi',price:60,cat:'drinks',veg:true,icon:'🍓'},
-  {name:'Fruit Mix Badam Milk',price:70,cat:'drinks',veg:true,icon:'🥛'},
-  {name:'Banana Lassi',price:50,cat:'drinks',veg:true,icon:'🍌'},
-  {name:'Sabja Nannari',price:40,cat:'drinks',veg:true,icon:'🌿'},
-  {name:'Sarbath Soda',price:40,cat:'drinks',veg:true,icon:'🫧'},
-  {name:'Masala Soda',price:35,cat:'drinks',veg:true,icon:'🫧'},
-  {name:'Butter Milk',price:25,cat:'drinks',veg:true,icon:'🥛'},
-  {name:'South Indian Filter Coffee',price:25,cat:'beverages',veg:true,icon:'☕'},
-  {name:'Tea',price:20,cat:'beverages',veg:true,icon:'🍵'},
-  {name:'Lemon Tea',price:25,cat:'beverages',veg:true,icon:'🍋'},
-  {name:'Black Coffee',price:25,cat:'beverages',veg:true,icon:'☕'},
-  {name:'Hot Coffee',price:30,cat:'beverages',veg:true,icon:'☕'},
-  {name:'Ginger Tea',price:25,cat:'beverages',veg:true,icon:'🫚'},
-  {name:'Green Tea',price:30,cat:'beverages',veg:true,icon:'🍵'},
-  {name:'Plain Milk',price:25,cat:'beverages',veg:true,icon:'🥛'},
-  {name:'Pepper Milk',price:35,cat:'beverages',veg:true,icon:'🌶️'},
-  {name:'Masala Chai',price:20,cat:'beverages',veg:true,icon:'🍵'},
-  {name:'Boost',price:40,cat:'beverages',veg:true,icon:'💪'},
-  {name:'Horlicks',price:40,cat:'beverages',veg:true,icon:'🥛'},
-  {name:'Honey Milk',price:45,cat:'beverages',veg:true,icon:'🍯'},
+  {name:'Soft Idli',price:70,cat:'tiffins',veg:true,icon:'🥮'},
+  {name:'Masala Dosa',price:100,cat:'tiffins',veg:true,icon:'🫓'},
+  {name:'Karam Dosa',price:80,cat:'tiffins',veg:true,icon:'🌶️'},
+  {name:'Egg Dosa',price:95,cat:'tiffins',veg:false,icon:'🍳'},
+  {name:'Onion Dosa',price:75,cat:'tiffins',veg:true,icon:'🧅'},
+  {name:'Double Egg Dosa',price:95,cat:'tiffins',veg:false,icon:'🍳'},
+  {name:'Dosa (Plain)',price:80,cat:'tiffins',veg:true,icon:'🫓'},
+  {name:'Special Combo Offer',price:150,cat:'tiffins',veg:true,icon:'🍽️',tag:'Bestseller'},
+  {name:'Ghee Idly',price:80,cat:'tiffins',veg:true,icon:'🥮'},
+  {name:'Ghee Karam Dosa',price:95,cat:'tiffins',veg:true,icon:'🌶️'},
+  {name:'Boiled Egg',price:45,cat:'tiffins',veg:false,icon:'🥚'},
+  {name:'Double Egg Omelette',price:70,cat:'tiffins',veg:false,icon:'🍳'},
+  {name:'Signature Badam Milk',price:90,cat:'drinks',veg:true,icon:'🥛',tag:'Must Try'},
+  {name:'Rose Milk',price:65,cat:'drinks',veg:true,icon:'🌹'},
+  {name:'Nimbu Soda',price:60,cat:'drinks',veg:true,icon:'🍋'},
+  {name:'Mango Lassi',price:85,cat:'drinks',veg:true,icon:'🥭',tag:'Seasonal'},
+  {name:'Fruit Mix Lassi',price:90,cat:'drinks',veg:true,icon:'🍓'},
+  {name:'Fruit Mix Badam Milk',price:100,cat:'drinks',veg:true,icon:'🥛'},
+  {name:'Banana Lassi',price:80,cat:'drinks',veg:true,icon:'🍌'},
+  {name:'Sabja Nannari',price:70,cat:'drinks',veg:true,icon:'🌿'},
+  {name:'Sarbath Soda',price:70,cat:'drinks',veg:true,icon:'🫧'},
+  {name:'Masala Soda',price:65,cat:'drinks',veg:true,icon:'🫧'},
+  {name:'Butter Milk',price:55,cat:'drinks',veg:true,icon:'🥛'},
+  {name:'South Indian Filter Coffee',price:55,cat:'beverages',veg:true,icon:'☕'},
+  {name:'Tea',price:50,cat:'beverages',veg:true,icon:'🍵'},
+  {name:'Lemon Tea',price:55,cat:'beverages',veg:true,icon:'🍋'},
+  {name:'Black Coffee',price:55,cat:'beverages',veg:true,icon:'☕'},
+  {name:'Hot Coffee',price:60,cat:'beverages',veg:true,icon:'☕'},
+  {name:'Ginger Tea',price:55,cat:'beverages',veg:true,icon:'🫚'},
+  {name:'Green Tea',price:60,cat:'beverages',veg:true,icon:'🍵'},
+  {name:'Plain Milk',price:55,cat:'beverages',veg:true,icon:'🥛'},
+  {name:'Pepper Milk',price:65,cat:'beverages',veg:true,icon:'🌶️'},
+  {name:'Masala Chai',price:50,cat:'beverages',veg:true,icon:'🍵'},
+  {name:'Boost',price:70,cat:'beverages',veg:true,icon:'💪'},
+  {name:'Horlicks',price:70,cat:'beverages',veg:true,icon:'🥛'},
+  {name:'Honey Milk',price:75,cat:'beverages',veg:true,icon:'🍯'},
 ];
 
 /* ───────── STATE ───────── */
